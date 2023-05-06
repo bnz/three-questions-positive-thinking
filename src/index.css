@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#root {
+    display: contents;
+}
+
+:root {
+    color-scheme: light;
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --main-bg-color: #fff;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --main-bg-color: #000;
+    }
+}
+
+body {
+    background-color: var(--main-bg-color);
+
+    background-image: radial-gradient(at 0% 0%, rgba(128, 0, 128, .5) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(75, 189, 216, .5) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(255, 127, 80, .5) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, rgba(255, 215, 0, .5) 0px, transparent 50%);
+
+    background-attachment: fixed;
+}
+
+@layer components {
+    .main {
+        @apply relative;
+        @apply min-h-[calc(100vh-40px)] text-black dark:text-white;
+    }
+
+    .header {
+        @apply sticky top-0 h-10 z-10;
+        @apply flex items-center justify-center;
+        @apply drop-shadow-xl;
+        @apply bg-white dark:bg-black;
+
+        @apply md:mb-10;
+    }
+
+    .content {
+        @apply rounded max-w-2xl;
+        @apply md:mx-auto pb-5 mb-10;
+        @apply dark:md:shadow-3xl md:shadow-2xl md:w-[42rem];
+    }
+
+    .content header {
+        @apply h-14 sticky top-10 mb-5 md:mb-1;
+    }
+
+    .content.headerBlur header {
+        @apply bg-white/30 dark:bg-black/30 backdrop-blur rounded;
+    }
+
+    .content h3 {
+        @apply text-2xl h-14 flex justify-center items-center relative;
+    }
+
+    .back-button {
+        @apply absolute top-0 left-0;
+        @apply bg-[url('./assets/arrow-left-dark.svg')] dark:bg-[url('./assets/arrow-left.svg')];
+        @apply bg-transparent bg-no-repeat bg-center bg-[length:20px_20px];
+        @apply w-14 h-14 p-0;
+    }
+
+    .restart-button {
+        @apply absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10;
+        @apply bg-[url('./assets/restart.svg')] dark:bg-[url('./assets/restart-dark.svg')];
+        @apply bg-no-repeat bg-[length:24px_24px] bg-center rounded;
+    }
+
+    .footer {
+        @apply flex items-center justify-center;
+        @apply h-[40px] text-black/30 dark:text-white/30 font-thin;
+    }
+
+    [type="button"],
+    [type="submit"] {
+        @apply rounded px-4 py-2 text-white;
+        @apply bg-blue-900 hover:bg-blue-700;
+        @apply active:bg-blue-500 shadow-inner;
+        @apply transition;
+    }
+
+    [type="button"][disabled],
+    [type="submit"][disabled] {
+        @apply bg-gray-500 text-gray-300;
+    }
+
+    input[type="text"] {
+        @apply border border-blue-900 bg-transparent rounded;
+        @apply p-2;
+        @apply focus:outline-0 focus:border-blue-700;
+        @apply drop-shadow-xl;
+    }
+
+    input[type="text"]::placeholder {
+        @apply italic font-thin;
+        @apply text-black dark:text-white;
+    }
+}
