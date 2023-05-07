@@ -3,7 +3,7 @@ import { StartForm } from "./components/StartForm"
 import { get, update } from "./utils/localStorage"
 import { Start } from "./components/Start"
 import { Questionnaire } from "./components/Questionnaire"
-import { History } from "./components/History"
+import { AnswersHistory } from "./components/AnswersHistory";
 
 export interface Data {
     name: string
@@ -13,6 +13,10 @@ export interface Data {
         answers: { index: number, answer: null | string }[]
     }[]
     questionnaire: { index: number, answer: null | string }[]
+    settings: {
+        opened: boolean
+        tab: number | null
+    }
 }
 
 export interface DataProps {
@@ -47,6 +51,6 @@ export const App: FC = () => {
     ) : {
         start: <Start data={data} goTo={goTo} />,
         questionnaire: <Questionnaire data={data} setData={setData} />,
-        history: <History data={data} goTo={goTo} />,
+        history: <AnswersHistory data={data} goTo={goTo} />,
     }[data.page]
 }

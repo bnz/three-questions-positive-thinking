@@ -12,22 +12,26 @@ const fn = (count: number): string => [
 
 export const Start: FC<GoTo> = ({ data, goTo }) => {
     const today = todayDate()
-    const isToday =false // data.history.find(({ date }) => date === today)
+    const isToday = data.history.find(({ date }) => date === today)
 
     return (
-        <MainLayout header={<Greeting name={data.name} />}>
+        <MainLayout header={<Greeting name={data.name}/>}>
             <div className="mx-auto text-center mt-5 mb-10">
                 {fn(data.history.length)}
             </div>
             {isToday ? (
                 <div className="text-center mb-10">
-                    <div className="mb-10">{i18n("thereAreNoMoreQuestionsForToday")}<br />{i18n("seeYouTomorrow")}!</div>
-                    <div className="bg-[url('./assets/party.svg')] bg-no-repeat bg-center bg-contain w-32 h-32 mx-auto" />
+                    <div className="mb-10">{i18n("thereAreNoMoreQuestionsForToday")}<br/>{i18n("seeYouTomorrow")}!</div>
+                    <div className="bg-[url('./assets/party.svg')] bg-no-repeat bg-center bg-contain w-32 h-32 mx-auto"/>
                 </div>
             ) : (
                 <>
-                    <div className="bg-[url('./assets/sun.svg')] bg-no-repeat bg-center bg-contain w-32 h-32 mx-auto mb-10" />
-                    <button type="button" className="text-3xl block mb-10 mx-auto" onClick={() => goTo("questionnaire")}>
+                    <div className="bg-[url('./assets/sun.svg')] bg-no-repeat bg-center bg-contain w-32 h-32 mx-auto mb-10"/>
+                    <button
+                        type="button"
+                        className="text-3xl block mb-10 mx-auto"
+                        onClick={() => goTo("questionnaire")}
+                    >
                         {i18n("questionsForToday")}
                     </button>
                 </>

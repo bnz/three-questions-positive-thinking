@@ -1,15 +1,21 @@
 import type { FC, PropsWithChildren, ReactNode } from "react"
 import { useLayoutEffect } from "react"
+import { i18n } from "../utils/i18n";
 
 const themeColorMeta = document.querySelector("[name=\"theme-color\"]")
 
 interface MainLayoutProps {
     header: ReactNode
     headerBlur?: boolean
+
     goBackTo?(): void
+
+    headerChildren?: ReactNode
 }
 
-export const MainLayout: FC<PropsWithChildren<MainLayoutProps>> = ({ children, header, goBackTo, headerBlur }) => {
+export const MainLayout: FC<PropsWithChildren<MainLayoutProps>> = (props) => {
+    const { children, header, goBackTo, headerBlur, headerChildren } = props
+
     useLayoutEffect(() => {
         const fn = ({ matches }: { matches: boolean }): void => {
             if (matches) {
@@ -29,14 +35,15 @@ export const MainLayout: FC<PropsWithChildren<MainLayoutProps>> = ({ children, h
         <>
             <main className="main">
                 <header className="header">
-                    Три вопроса каждый день
+                    {i18n("threeQuestionsEveryDay")}
                 </header>
                 <section className={`content${headerBlur ? " headerBlur" : ""}`}>
                     <header>
                         <h3>{header}</h3>
                         {goBackTo && (
-                            <button className="back-button" onClick={goBackTo} />
+                            <button className="back-button" onClick={goBackTo}/>
                         )}
+                        {headerChildren}
                     </header>
                     {children}
                 </section>

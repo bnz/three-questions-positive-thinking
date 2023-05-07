@@ -99,7 +99,7 @@ export const Questionnaire: FC<DataProps> = ({ data, setData }) => {
             goBackTo={() => setData(update({ page: "start" }))}
         >
             <form className="text-center flex flex-col gap-10 my-10 mx-5 md:mx-20" onSubmit={save}>
-                <h1 className="text-3xl">{i18n(questions[question].title)}</h1>
+                <h1 className="text-3xl">{i18n(questions[question].title)}...</h1>
                 <input
                     ref={ref}
                     type="text"

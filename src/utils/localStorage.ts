@@ -1,4 +1,5 @@
 import { Data } from "../App"
+import { type } from "@testing-library/user-event/dist/type";
 
 export const lsKey = "history"
 
@@ -8,6 +9,7 @@ export const create = (name: string): Data => {
         page: "start",
         history: [],
         questionnaire: [],
+        settings: { opened: false, tab: null }
     }
     window.localStorage.setItem(lsKey, JSON.stringify(data))
     return data
@@ -26,20 +28,28 @@ export const get = (): Data | null => {
     return data
 }
 
-export const update = (newData: Partial<Data>): Data => {
+type Update = (newData: Partial<Data> | ((data: Data) => Partial<Data>)) => Data
+
+export const update: Update = (newData) => {
     const dataString = window.localStorage.getItem(lsKey)
 
-    let res = newData
+    let res: Partial<Data> | "" = ""
 
     if (dataString !== null) {
         try {
             const data = JSON.parse(dataString)
 
-            res = {
-                ...data,
-                ...newData,
+            if (typeof newData === "function") {
+                res = {
+                    ...data,
+                    ...newData(data),
+                }
+            } else {
+                res = {
+                    ...data,
+                    ...newData,
+                }
             }
-
         } catch (e) {
             console.error(e)
         }

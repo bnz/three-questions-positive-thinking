@@ -55,11 +55,53 @@ body {
     }
 
     .content header {
-        @apply h-14 sticky top-10 mb-5 md:mb-1;
+        @apply h-14 sticky top-10;
     }
 
     .content.headerBlur header {
-        @apply bg-white/30 dark:bg-black/30 backdrop-blur rounded;
+        @apply bg-white/30 dark:bg-black/30 backdrop-blur-2xl md:rounded-t drop-shadow;
+    }
+
+    .subheader {
+        @apply sticky top-24 my-2;
+        /*@apply bg-white/90 dark:bg-black/90;*/
+        @apply hidden;
+        @apply flex-row;
+    }
+
+    .subheader.open {
+        @apply flex;
+    }
+
+    .tabs {
+        @apply flex w-full space-x-1 bg-white/20 dark:bg-black/20 p-1 pr-0;
+        @apply rounded-r;
+    }
+
+    .tabs button {
+        @apply py-2 text-sm;
+        @apply focus:outline-none whitespace-nowrap px-3;
+    }
+
+    .tab {
+        @apply text-black dark:text-white/70;
+        @apply hover:bg-white/[0.12] hover:text-black/70;
+        @apply hover:dark:bg-black/[0.12] hover:dark:text-white/70;
+    }
+
+    .tabs .selected {
+        @apply bg-white dark:bg-black dark:font-bold rounded;
+    }
+
+    .tabs .clear {
+        @apply p-0 w-0 h-full cursor-pointer rounded;
+        @apply bg-[url('./assets/clear.svg')] dark:bg-[url('./assets/clear-dark.svg')];
+        @apply bg-transparent bg-no-repeat bg-center bg-[length:20px_20px];
+        @apply transition-all;
+    }
+
+    .tabs .clear.shown {
+        @apply w-9 !mr-1;
     }
 
     .content h3 {
@@ -71,12 +113,24 @@ body {
         @apply bg-[url('./assets/arrow-left-dark.svg')] dark:bg-[url('./assets/arrow-left.svg')];
         @apply bg-transparent bg-no-repeat bg-center bg-[length:20px_20px];
         @apply w-14 h-14 p-0;
+        @apply active:shadow-inner;
     }
 
     .restart-button {
         @apply absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10;
         @apply bg-[url('./assets/restart.svg')] dark:bg-[url('./assets/restart-dark.svg')];
-        @apply bg-no-repeat bg-[length:24px_24px] bg-center rounded;
+        @apply bg-no-repeat bg-[length:24px_24px] bg-center;
+    }
+
+    .settings-button {
+        @apply absolute top-0 right-0 w-14 h-14;
+        @apply bg-[url('./assets/settings.svg')] dark:bg-[url('./assets/settings-dark.svg')];
+        @apply bg-no-repeat bg-[length:24px_24px] bg-center rounded-tr;
+        @apply active:shadow-inner;
+    }
+
+    .settings-button.pressed {
+        @apply shadow-inner bg-black/5 dark:bg-black/50;
     }
 
     .footer {
@@ -107,5 +161,24 @@ body {
     input[type="text"]::placeholder {
         @apply italic font-thin;
         @apply text-black dark:text-white;
+    }
+
+    .history-day {
+        @apply gap-3;
+        @apply flex items-start py-3;
+    }
+
+    .history-day:not(:first-of-type) {
+        @apply border-t first-of-type:border-t-0 border-t-gray-300 dark:border-t-gray-700;
+    }
+
+    .cell-odd {
+        @apply bg-white/50 dark:bg-black/50;
+    }
+
+    .history-date {
+        @apply cell-odd;
+        @apply p-2 inline-block max-w-min text-center rounded;
+        @apply md:my-2 ml-3 md:mx-7;
     }
 }
