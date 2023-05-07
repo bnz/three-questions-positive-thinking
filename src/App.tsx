@@ -16,6 +16,7 @@ export interface Data {
     settings: {
         opened: boolean
         tab: number | null
+        sort: boolean
     }
 }
 

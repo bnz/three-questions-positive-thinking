@@ -40,12 +40,9 @@ body {
     }
 
     .header {
-        @apply sticky top-0 h-10 z-10;
-        @apply flex items-center justify-center;
-        @apply drop-shadow-xl;
-        @apply bg-white dark:bg-black;
-
-        @apply md:mb-10;
+        @apply sticky top-0 h-10 z-10 md:mb-10;
+        @apply flex items-center justify-center drop-shadow-xl;
+        @apply bg-white/50 dark:bg-black/25;
     }
 
     .content {
@@ -63,10 +60,7 @@ body {
     }
 
     .subheader {
-        @apply sticky top-24 my-2;
-        /*@apply bg-white/90 dark:bg-black/90;*/
-        @apply hidden;
-        @apply flex-row;
+        @apply sticky top-24 my-2 hidden flex-row;
     }
 
     .subheader.open {
@@ -74,13 +68,11 @@ body {
     }
 
     .tabs {
-        @apply flex w-full space-x-1 bg-white/20 dark:bg-black/20 p-1 pr-0;
-        @apply rounded-r;
+        @apply flex w-full space-x-1 bg-white/20 dark:bg-black/20 p-1 pr-0 backdrop-blur-2xl;
     }
 
     .tabs button {
-        @apply py-2 text-sm;
-        @apply focus:outline-none whitespace-nowrap px-3;
+        @apply py-2 text-sm focus:outline-none whitespace-nowrap px-3;
     }
 
     .tab {
@@ -136,6 +128,17 @@ body {
     .footer {
         @apply flex items-center justify-center;
         @apply h-[40px] text-black/30 dark:text-white/30 font-thin;
+    }
+
+    .sort-button {
+        @apply absolute right-1 top-1 bottom-1;
+        @apply w-9 rounded;
+        @apply bg-[url('./assets/sort.svg')] dark:bg-[url('./assets/sort-dark.svg')];
+        @apply bg-no-repeat bg-[length:24px_24px] bg-center;
+    }
+
+    .sort-button.sort {
+        @apply shadow-inner bg-black/5 dark:bg-black/50;
     }
 
     [type="button"],

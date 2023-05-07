@@ -9,7 +9,11 @@ export const create = (name: string): Data => {
         page: "start",
         history: [],
         questionnaire: [],
-        settings: { opened: false, tab: null }
+        settings: {
+            opened: false,
+            tab: null,
+            sort: false,
+        }
     }
     window.localStorage.setItem(lsKey, JSON.stringify(data))
     return data
