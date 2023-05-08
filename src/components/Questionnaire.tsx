@@ -20,7 +20,6 @@ export const Questionnaire: FC<DataProps> = ({ data, setData }) => {
 
     useEffect(() => {
         const { questionnaire } = data
-
         if (questionnaire.length > 0) {
             const { index } = questionnaire[questionnaire.length - 1]
             setQuestion(index)
@@ -93,10 +92,12 @@ export const Questionnaire: FC<DataProps> = ({ data, setData }) => {
                 <>
                     <span className="font-bold">{data.questionnaire.length}</span>
                     <span className="text-gray-500 font-light ml-1">/ {questions.length}</span>
-                    <button className="restart-button" onClick={reset} />
                 </>
             }
             goBackTo={() => setData(update({ page: "start" }))}
+            headerChildren={
+                <button className="restart-button" onClick={reset} />
+            }
         >
             <form className="text-center flex flex-col gap-10 my-10 mx-5 md:mx-20" onSubmit={save}>
                 <h1 className="text-3xl">{i18n(questions[question].title)}...</h1>

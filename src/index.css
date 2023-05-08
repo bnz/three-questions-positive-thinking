@@ -8,6 +8,7 @@
 
 :root {
     color-scheme: light;
+    --app-height: 100vh;
 }
 
 @media (prefers-color-scheme: light) {
@@ -34,15 +35,24 @@ body {
 }
 
 @layer components {
+
     .main {
         @apply relative;
-        @apply min-h-[calc(100vh-40px)] text-black dark:text-white;
+        /*@apply min-h-[calc(100%-40px)];*/
+        @apply text-black dark:text-white;
+        height: calc(var(--app-height) - 40px);
     }
 
     .header {
-        @apply sticky top-0 h-10 z-10 md:mb-10;
+        @apply sticky top-0 backdrop-blur-2xl;
+        @apply h-10 z-10 md:mb-10;
         @apply flex items-center justify-center drop-shadow-xl;
         @apply bg-white/50 dark:bg-black/25;
+    }
+
+    .footer {
+        @apply flex items-center justify-center;
+        @apply h-[40px] text-black/30 dark:text-white/30 font-thin;
     }
 
     .content {
@@ -52,15 +62,19 @@ body {
     }
 
     .content header {
-        @apply h-14 sticky top-10;
+        @apply h-14 relative md:sticky md:top-10;
     }
 
     .content.headerBlur header {
         @apply bg-white/30 dark:bg-black/30 backdrop-blur-2xl md:rounded-t drop-shadow;
     }
 
+    .content h3 {
+        @apply text-2xl h-14 flex justify-center items-center relative;
+    }
+
     .subheader {
-        @apply sticky top-24 my-2 hidden flex-row;
+        @apply relative md:sticky md:top-24 my-2 hidden flex-row;
     }
 
     .subheader.open {
@@ -96,10 +110,6 @@ body {
         @apply w-9 !mr-1;
     }
 
-    .content h3 {
-        @apply text-2xl h-14 flex justify-center items-center relative;
-    }
-
     .back-button {
         @apply absolute top-0 left-0;
         @apply bg-[url('./assets/arrow-left-dark.svg')] dark:bg-[url('./assets/arrow-left.svg')];
@@ -123,11 +133,6 @@ body {
 
     .settings-button.pressed {
         @apply shadow-inner bg-black/5 dark:bg-black/50;
-    }
-
-    .footer {
-        @apply flex items-center justify-center;
-        @apply h-[40px] text-black/30 dark:text-white/30 font-thin;
     }
 
     .sort-button {
