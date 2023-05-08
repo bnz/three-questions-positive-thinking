@@ -1,5 +1,4 @@
 import { Data } from "../App"
-import { type } from "@testing-library/user-event/dist/type";
 
 export const lsKey = "history"
 

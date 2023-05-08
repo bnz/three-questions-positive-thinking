@@ -2,7 +2,7 @@ import type { FC } from "react"
 import { MainLayout } from "./MainLayout"
 import { Greeting } from "./Greeting"
 import { todayDate } from "../utils/todayDate"
-import { Data, GoTo } from "../App"
+import { GoTo } from "../App"
 import { i18n } from "../utils/i18n"
 
 const fn = (count: number): string => [

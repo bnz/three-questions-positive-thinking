@@ -19,10 +19,9 @@ export const todayDate = (humanFormat?: boolean): string => {
 }
 
 export const formatToHuman = (date: string): string => {
-    const [year, month, day] = date.split("-")
+    const [month, day] = date.split("-")
     return [
         day.match(/^([0-9])/ig)?.[0] === "0" ? day.substring(1) : day,
         getMonthName(Number(month)),
-        // year,
     ].join(" ")
 }
