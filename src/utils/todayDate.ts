@@ -34,7 +34,7 @@ export const currentTime = () => {
 }
 
 export const formatToHuman = (date: string): string => {
-    const [month, day] = date.split("-")
+    const [, month, day] = date.split("-")
     return [
         day.match(/^([0-9])/ig)?.[0] === "0" ? day.substring(1) : day,
         getMonthName(Number(month)),

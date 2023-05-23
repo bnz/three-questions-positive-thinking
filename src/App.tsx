@@ -1,4 +1,14 @@
-import { createContext, Dispatch, FC, SetStateAction, useCallback, useContext, useEffect, useState } from "react"
+import {
+    createContext,
+    Dispatch,
+    FC,
+    SetStateAction,
+    useCallback,
+    useContext,
+    useEffect,
+    useMemo,
+    useState
+} from "react"
 import { Welcome } from "./components/Welcome"
 import { defaultDataSet, get, update } from "./utils/localStorage"
 import { Start } from "./components/Start"
@@ -43,8 +53,7 @@ export const useData = (): DataContextProps => useContext(DataContext)
 export const App: FC = () => {
     const [data, setData] = useState<Data>(defaultDataSet)
     const [loaded, setLoaded] = useState(false)
-
-    const rawData = get()
+    const rawData = useMemo(get, [])
 
     useEffect(() => {
         setTimeout(() => {
