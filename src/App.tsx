@@ -1,15 +1,18 @@
-import { Dispatch, FC, SetStateAction, useCallback, useEffect, useState } from "react"
-import { StartForm } from "./components/StartForm"
-import { get, update } from "./utils/localStorage"
+import { createContext, Dispatch, FC, SetStateAction, useCallback, useContext, useEffect, useState } from "react"
+import { Welcome } from "./components/Welcome"
+import { defaultDataSet, get, update } from "./utils/localStorage"
 import { Start } from "./components/Start"
 import { Questionnaire } from "./components/Questionnaire"
-import { AnswersHistory } from "./components/AnswersHistory";
+import { AnswersHistory } from "./components/AnswersHistory"
+import { UserSettings } from "./components/UserSettings"
 
 export interface Data {
     name: string
-    page: "history" | "start" | "questionnaire"
+    page: "history" | "start" | "questionnaire" | "userSettings"
     history: {
         date: string
+        dayOfWeek?: string
+        time?: string
         answers: { index: number, answer: null | string }[]
     }[]
     questionnaire: { index: number, answer: null | string }[]
@@ -20,26 +23,37 @@ export interface Data {
     }
 }
 
-export interface DataProps {
+interface DataContextProps {
     data: Data
-    setData: Dispatch<SetStateAction<null | Data>>
-}
+    setData: Dispatch<SetStateAction<Data>>
 
-export interface GoTo {
-    data: Data
     goTo(page: Data["page"]): void
 }
 
+const DataContext = createContext<DataContextProps>({
+    data: defaultDataSet,
+    setData() {
+    },
+    goTo(page: Data["page"]) {
+    }
+})
+
+export const useData = (): DataContextProps => useContext(DataContext)
+
 export const App: FC = () => {
-    const [data, setData] = useState<null | Data>(null)
+    const [data, setData] = useState<Data>(defaultDataSet)
     const [loaded, setLoaded] = useState(false)
+
+    const rawData = get()
 
     useEffect(() => {
         setTimeout(() => {
-            setData(get())
+            if (rawData !== null) {
+                setData(rawData)
+            }
             setLoaded(true)
         }, 0)
-    }, [setData, setLoaded])
+    }, [rawData, setData, setLoaded])
 
     const goTo = useCallback((page: Data["page"]) => setData(update({ page })), [setData])
 
@@ -47,11 +61,16 @@ export const App: FC = () => {
         return null
     }
 
-    return data === null ? (
-        <StartForm setData={setData} />
-    ) : {
-        start: <Start data={data} goTo={goTo} />,
-        questionnaire: <Questionnaire data={data} setData={setData} />,
-        history: <AnswersHistory data={data} goTo={goTo} />,
-    }[data.page]
+    return (
+        <DataContext.Provider value={{ data, setData, goTo }}>
+            {rawData === null ? (
+                <Welcome />
+            ) : {
+                start: <Start />,
+                questionnaire: <Questionnaire />,
+                history: <AnswersHistory />,
+                userSettings: <UserSettings />,
+            }[data.page]}
+        </DataContext.Provider>
+    )
 }

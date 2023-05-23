@@ -8,7 +8,7 @@
 
 :root {
     color-scheme: light;
-    --app-height: 100vh;
+    /*--app-height: 100vh;*/
 }
 
 @media (prefers-color-scheme: light) {
@@ -38,16 +38,27 @@ body {
 
     .main {
         @apply relative;
-        /*@apply min-h-[calc(100%-40px)];*/
         @apply text-black dark:text-white;
-        height: calc(var(--app-height) - 40px);
     }
 
     .header {
         @apply sticky top-0 backdrop-blur-2xl;
-        @apply h-10 z-10 md:mb-10;
+        @apply h-10 z-10 lg:mb-10;
         @apply flex items-center justify-center drop-shadow-xl;
         @apply bg-white/50 dark:bg-black/25;
+    }
+
+    .greeting-button {
+        @apply ml-1.5 relative;
+    }
+
+    .gear-icon {
+        @apply -translate-y-1/2;
+        @apply absolute top-1/2 -right-5;
+        @apply h-4 w-4;
+        @apply bg-no-repeat bg-center;
+        @apply bg-[url('./assets/gear.svg')] dark:bg-[url('./assets/gear-dark.svg')];
+        @apply bg-[length:16px_16px];
     }
 
     .footer {
@@ -56,9 +67,11 @@ body {
     }
 
     .content {
-        @apply rounded max-w-2xl;
-        @apply md:mx-auto pb-5 mb-10;
-        @apply dark:md:shadow-3xl md:shadow-2xl md:w-[42rem];
+        /*background-color: rgba(255, 0, 0, 0.32);*/
+
+        @apply relative rounded max-w-2xl;
+        @apply mx-auto pb-5 mb-10;
+        @apply dark:lg:shadow-3xl lg:shadow-2xl lg:w-[42rem];
     }
 
     .content header {
@@ -186,7 +199,12 @@ body {
 
     .history-date {
         @apply cell-odd;
-        @apply p-2 inline-block max-w-min text-center rounded;
+        @apply inline-block max-w-min text-center rounded;
         @apply md:my-2 ml-3 md:mx-7;
+        @apply leading-4;
+    }
+
+    .history-date .additional {
+        @apply text-xs text-black/30 dark:text-white/30;
     }
 }

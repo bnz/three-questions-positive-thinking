@@ -1,16 +1,17 @@
 import type { FC } from "react"
-import { GoTo } from "../App";
-import { useCallback, useState } from "react";
-import { get, update } from "../utils/localStorage";
-import { i18n } from "../utils/i18n";
-import { formatToHuman } from "../utils/todayDate";
-import { questions } from "./Questionnaire";
-import { MainLayout } from "./MainLayout";
-import { cx } from "../utils/cx";
+import { useCallback, useState } from "react"
+import { get, update } from "../utils/localStorage"
+import { i18n } from "../utils/i18n"
+import { formatToHuman } from "../utils/todayDate"
+import { questions } from "./Questionnaire"
+import { MainLayout } from "./MainLayout"
+import { cx } from "../utils/cx"
+import { useData } from "../App"
 
-export const AnswersHistory: FC<GoTo> = ({ data, goTo }) => {
+export const AnswersHistory: FC = () => {
+    const { data, goTo } = useData()
     const { opened, tab, sort: sortSaved } = get()?.settings || { opened: false, tab: null, sort: false }
-    const [open, setOpen] = useState<boolean>(opened);
+    const [open, setOpen] = useState<boolean>(opened)
     const [tabIndex, setTabIndex] = useState<number | null>(tab)
     const [sort, setSort] = useState<boolean>(sortSaved)
     const toggle = useCallback(() => {
@@ -78,13 +79,22 @@ export const AnswersHistory: FC<GoTo> = ({ data, goTo }) => {
             {data.history.sort(({ date: a }, { date: b }) => {
                 const [aa, bb] = sort ? [b, a] : [a, b]
                 return Date.parse(bb) - Date.parse(aa)
-            }).map(({ date, answers }, index) => (
+            }).map(({ date, time, dayOfWeek, answers }, index) => (
                 <div key={index} className="history-day">
                     {tabIndex === null ? [
-                        <div key={1} className="history-date">
+                        <div key={1} className={cx("history-date", dayOfWeek && time ? "py-0.5 px-2" : "p-2")}>
+                            {dayOfWeek && (
+                                <div className="additional">{dayOfWeek}</div>
+                            )}
                             {formatToHuman(date)}
+                            {time && (
+                                <div className="additional">{time}</div>
+                            )}
                         </div>,
-                        <div key={2} className="grid grid-cols-[120px_1fr] md:grid-cols-[150px_1fr] flex-1 overflow-hidden">
+                        <div
+                            key={2}
+                            className="grid grid-cols-[120px_1fr] md:grid-cols-[150px_1fr] flex-1 overflow-hidden"
+                        >
                             {questions.map(({ title }, i) => [
                                 <div key={i} className="py-0.5 flex items-center">{i18n(title)}</div>,
                                 <div key={i + 100000} className="py-0.5 flex items-center">
@@ -93,7 +103,15 @@ export const AnswersHistory: FC<GoTo> = ({ data, goTo }) => {
                             ])}
                         </div>
                     ] : [
-                        <div key={1} className="ml-5 text-black/30 dark:text-white/30">{formatToHuman(date)}</div>,
+                        <div key={1} className="ml-5 text-black/30 dark:text-white/30 flex gap-1">
+                            {formatToHuman(date)}
+                            {time && (
+                                <span>{time}</span>
+                            )}
+                            {dayOfWeek && (
+                                <span className="uppercase">{dayOfWeek}</span>
+                            )}
+                        </div>,
                         questions.map(({ title }, i) => tabIndex === i && (
                             <div key={i}>
                                 {answers.find(({ index }) => index === i)?.answer}

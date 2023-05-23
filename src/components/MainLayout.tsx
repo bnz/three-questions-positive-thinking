@@ -29,12 +29,6 @@ export const MainLayout: FC<PropsWithChildren<MainLayoutProps>> = (props) => {
         const mql = window.matchMedia("(prefers-color-scheme: dark)")
         mql.addEventListener("change", fn)
         fn({ matches: mql.matches })
-
-        const appHeight = () => {
-            document.documentElement.style.setProperty("--app-height", `${window.innerHeight}px`)
-        }
-        window.addEventListener("resize", appHeight)
-        appHeight()
     }, [])
 
     return (

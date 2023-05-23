@@ -2,17 +2,23 @@ import { Data } from "../App"
 
 export const lsKey = "history"
 
+export const defaultDataSet: Data = {
+    name: "",
+    page: "start",
+    history: [],
+    questionnaire: [],
+    settings: {
+        opened: false,
+        tab: null,
+        sort: false,
+    }
+}
+
+
 export const create = (name: string): Data => {
     const data: Data = {
+        ...defaultDataSet,
         name,
-        page: "start",
-        history: [],
-        questionnaire: [],
-        settings: {
-            opened: false,
-            tab: null,
-            sort: false,
-        }
     }
     window.localStorage.setItem(lsKey, JSON.stringify(data))
     return data
@@ -61,4 +67,8 @@ export const update: Update = (newData) => {
     window.localStorage.setItem(lsKey, JSON.stringify(res))
 
     return res as Data // FIXME
+}
+
+export const clear = () => {
+    window.localStorage.removeItem(lsKey)
 }

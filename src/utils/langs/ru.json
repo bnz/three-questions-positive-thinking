@@ -16,5 +16,12 @@
   "save": "Сохранить",
   "thereAreNoMoreQuestionsForToday": "На сегодня вопросов больше нет,",
   "seeYouTomorrow": "увидимся завтра",
-  "answersHistory": "История ответов"
+  "answersHistory": "История ответов",
+  "userSettings": "Настройки",
+  "changeName": "Изменить имя:",
+  "resetAll": "Удалить всё!",
+  "resetAllTops": "Удалить всю историю и начать все заново!###Данные будут отеряны безвозвратно!",
+  "cancel": "Отмена",
+  "yesDeleteAll": "Да, удалить все!",
+  "areYouSure": "Вы уверены?"
 }

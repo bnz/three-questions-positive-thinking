@@ -1,9 +1,9 @@
 import type { ChangeEvent, FC } from "react"
 import { FormEvent, useCallback, useEffect, useRef, useState } from "react"
 import { generateRandom, randomIntFromInterval } from "../utils/randomIntFromInterval"
-import { DataProps } from "../App"
+import { useData } from "../App"
 import { update } from "../utils/localStorage"
-import { todayDate } from "../utils/todayDate"
+import { currentDayOfWeek, currentTime, todayDate } from "../utils/todayDate"
 import { MainLayout } from "./MainLayout"
 import { i18n, SomeKeys } from "../utils/i18n"
 
@@ -13,7 +13,8 @@ export const questions: { title: SomeKeys }[] = [
     { title: "iWant" },
 ]
 
-export const Questionnaire: FC<DataProps> = ({ data, setData }) => {
+export const Questionnaire: FC = () => {
+    const { data, setData } = useData()
     const [question, setQuestion] = useState<number | null>(null)
     const [answer, setAnswer] = useState("")
     const ref = useRef<HTMLInputElement | null>(null)
@@ -65,6 +66,8 @@ export const Questionnaire: FC<DataProps> = ({ data, setData }) => {
                     ...newData.history,
                     {
                         date: todayDate(),
+                        time: currentTime(),
+                        dayOfWeek: currentDayOfWeek(),
                         answers: newData.questionnaire,
                     },
                 ],
