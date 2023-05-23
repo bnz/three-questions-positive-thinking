@@ -96,9 +96,11 @@ export const AnswersHistory: FC = () => {
                             className="grid grid-cols-[120px_1fr] md:grid-cols-[150px_1fr] flex-1 overflow-hidden"
                         >
                             {questions.map(({ title }, i) => [
-                                <div key={i} className="py-0.5 flex items-center">{i18n(title)}</div>,
-                                <div key={i + 100000} className="py-0.5 flex items-center">
-                                    {answers.find(({ index }) => index === i)?.answer}
+                                <div key={i} className="py-0.5 flex items-start">{i18n(title)}</div>,
+                                <div key={i + 100000} className="py-0.5 flex flex-col items-start">
+                                    {answers.find(({ index }) => index === i)?.answer?.split(",").map((str, i) => (
+                                        <div key={i} className="w-full">{str.trim()}</div>
+                                    ))}
                                 </div>
                             ])}
                         </div>

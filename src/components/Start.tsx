@@ -13,7 +13,7 @@ const fn = (count: number): string => [
 export const Start: FC = () => {
     const { data, goTo } = useData()
     const today = todayDate()
-    const isToday = false // data.history.find(({ date }) => date === today)
+    const isToday = data.history.find(({ date }) => date === today)
 
     return (
         <MainLayout header={<Greeting name={data.name} />}>
