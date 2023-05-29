@@ -1,5 +1,5 @@
 import type { FC } from "react"
-import { useData } from "../App"
+import { useData } from "../DataContext"
 import { MainLayout } from "./MainLayout"
 import { i18n } from "../utils/i18n"
 import { NameForm } from "./NameForm"

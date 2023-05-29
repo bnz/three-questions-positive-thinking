@@ -1,59 +1,16 @@
-import {
-    createContext,
-    Dispatch,
-    FC,
-    SetStateAction,
-    useCallback,
-    useContext,
-    useEffect,
-    useMemo,
-    useState
-} from "react"
+import { FC, useCallback, useEffect, useMemo, useState } from "react"
 import { Welcome } from "./components/Welcome"
 import { defaultDataSet, get, update } from "./utils/localStorage"
 import { Start } from "./components/Start"
 import { Questionnaire } from "./components/Questionnaire"
 import { AnswersHistory } from "./components/AnswersHistory"
 import { UserSettings } from "./components/UserSettings"
-
-export interface Data {
-    name: string
-    page: "history" | "start" | "questionnaire" | "userSettings"
-    history: {
-        date: string
-        dayOfWeek?: string
-        time?: string
-        answers: { index: number, answer: null | string }[]
-    }[]
-    questionnaire: { index: number, answer: null | string }[]
-    settings: {
-        opened: boolean
-        tab: number | null
-        sort: boolean
-    }
-}
-
-interface DataContextProps {
-    data: Data
-    setData: Dispatch<SetStateAction<Data>>
-
-    goTo(page: Data["page"]): void
-}
-
-const DataContext = createContext<DataContextProps>({
-    data: defaultDataSet,
-    setData() {
-    },
-    goTo(page: Data["page"]) {
-    }
-})
-
-export const useData = (): DataContextProps => useContext(DataContext)
+import { Data, DataContext } from "./DataContext"
 
 export const App: FC = () => {
     const [data, setData] = useState<Data>(defaultDataSet)
     const [loaded, setLoaded] = useState(false)
-    const rawData = useMemo(get, [])
+    const rawData = useMemo(get, [data])
 
     useEffect(() => {
         setTimeout(() => {

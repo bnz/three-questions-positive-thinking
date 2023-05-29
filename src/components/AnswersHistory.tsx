@@ -2,11 +2,11 @@ import type { FC } from "react"
 import { useCallback, useState } from "react"
 import { get, update } from "../utils/localStorage"
 import { i18n } from "../utils/i18n"
-import { formatToHuman } from "../utils/todayDate"
+import { currentDayOfWeek, formatToHuman } from "../utils/todayDate"
 import { questions } from "./Questionnaire"
 import { MainLayout } from "./MainLayout"
 import { cx } from "../utils/cx"
-import { useData } from "../App"
+import { useData } from "../DataContext"
 
 export const AnswersHistory: FC = () => {
     const { data, goTo } = useData()
@@ -79,13 +79,13 @@ export const AnswersHistory: FC = () => {
             {data.history.sort(({ date: a }, { date: b }) => {
                 const [aa, bb] = sort ? [b, a] : [a, b]
                 return Date.parse(bb) - Date.parse(aa)
-            }).map(({ date, time, dayOfWeek, answers }, index) => (
+            }).map(({ date, time, answers }, index) => (
                 <div key={index} className="history-day">
                     {tabIndex === null ? [
-                        <div key={1} className={cx("history-date", dayOfWeek && time ? "py-0.5 px-2" : "p-2")}>
-                            {dayOfWeek && (
-                                <div className="additional">{dayOfWeek}</div>
-                            )}
+                        <div key={1} className={cx("history-date", time ? "py-0.5 px-2" : "p-2")}>
+                            <div className="additional">
+                                {currentDayOfWeek(date)}
+                            </div>
                             {formatToHuman(date)}
                             {time && (
                                 <div className="additional">{time}</div>
@@ -105,14 +105,12 @@ export const AnswersHistory: FC = () => {
                             ])}
                         </div>
                     ] : [
-                        <div key={1} className="ml-5 text-black/30 dark:text-white/30 flex gap-1">
+                        <div key={1} className="ml-5 text-black/30 dark:text-white/30 flex gap-1 whitespace-nowrap">
                             {formatToHuman(date)}
                             {time && (
                                 <span>{time}</span>
                             )}
-                            {dayOfWeek && (
-                                <span className="uppercase">{dayOfWeek}</span>
-                            )}
+                            <span className="uppercase">{currentDayOfWeek(date)}</span>
                         </div>,
                         questions.map(({ title }, i) => tabIndex === i && (
                             <div key={i}>

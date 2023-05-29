@@ -3,10 +3,15 @@ import { create } from "../utils/localStorage"
 import { MainLayout } from "./MainLayout"
 import { i18n } from "../utils/i18n"
 import { NameForm } from "./NameForm"
-import { useData } from "../App"
+import { useData } from "../DataContext"
+import { useCallback } from "react"
 
 export const Welcome: FC = () => {
-    const { setData } = useData()
+    const { setData, goTo } = useData()
+    const onSubmit = useCallback((name: string) => {
+        setData(create(name))
+        goTo("start")
+    }, [setData, goTo])
 
     return (
         <MainLayout header={i18n("hello")}>
@@ -14,7 +19,7 @@ export const Welcome: FC = () => {
             <p className="text-center mb-5">
                 {i18n("enterYourNameToGetStarted")}:
             </p>
-            <NameForm onSubmit={(name) => setData(create(name))} />
+            <NameForm onSubmit={onSubmit} />
         </MainLayout>
     )
 }

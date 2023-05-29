@@ -16,19 +16,23 @@ const getCurrentDateTime = () => {
 }
 
 export const todayDate = (humanFormat?: boolean): string => {
-    const date = getCurrentDateTime().split("T")[0]
+    const [date] = getCurrentDateTime().split("T")
     if (humanFormat) {
         return formatToHuman(date)
     }
     return date
 }
 
-export const currentDayOfWeek = () => {
-    return new Intl.DateTimeFormat("ru-RU", { weekday: "short" }).format(new Date("1995-02-14"))
-}
+export const currentDayOfWeek = (date: string) =>
+    new Intl
+        .DateTimeFormat(map[lang], { weekday: "short" })
+        .format(new Date(date))
 
 export const currentTime = () => {
-    const [hh, mm] = getCurrentDateTime().split("T")[1].split(".")[0].split(":")
+    const [hh, mm] = getCurrentDateTime()
+        .split("T")[1]
+        .split(".")[0]
+        .split(":")
 
     return [hh, mm].join(":")
 }

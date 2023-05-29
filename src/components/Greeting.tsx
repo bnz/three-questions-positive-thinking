@@ -1,7 +1,7 @@
 import type { MouseEvent, FC, } from "react"
 import { i18n, SomeKeys } from "../utils/i18n"
 import { useCallback } from "react"
-import { useData } from "../App"
+import { useData } from "../DataContext"
 
 interface GreetingProps {
     name: string

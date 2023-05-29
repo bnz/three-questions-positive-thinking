@@ -3,7 +3,7 @@ import { MainLayout } from "./MainLayout"
 import { Greeting } from "./Greeting"
 import { todayDate } from "../utils/todayDate"
 import { i18n } from "../utils/i18n"
-import { useData } from "../App"
+import { useData } from "../DataContext"
 
 const fn = (count: number): string => [
     i18n("todayIsNDay").replace("###", `${count === 0 ? 1 : count}`),

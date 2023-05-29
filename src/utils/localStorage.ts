@@ -1,4 +1,4 @@
-import { Data } from "../App"
+import { Data } from "../DataContext"
 
 export const lsKey = "history"
 
