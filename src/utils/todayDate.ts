@@ -28,6 +28,11 @@ export const currentDayOfWeek = (date: string) =>
         .DateTimeFormat(map[lang], { weekday: "short" })
         .format(new Date(date))
 
+export const getMonth = (date: string) =>
+    new Intl
+        .DateTimeFormat(map[lang], { month: "long" })
+        .format(new Date(date))
+
 export const currentTime = () => {
     const [hh, mm] = getCurrentDateTime()
         .split("T")[1]
@@ -37,10 +42,13 @@ export const currentTime = () => {
     return [hh, mm].join(":")
 }
 
-export const formatToHuman = (date: string): string => {
+export const formatToHuman = (date: string, showMonth = true): string => {
     const [, month, day] = date.split("-")
-    return [
+    const res = [
         day.match(/^([0-9])/ig)?.[0] === "0" ? day.substring(1) : day,
-        getMonthName(Number(month)),
-    ].join(" ")
+    ]
+    if (showMonth) {
+        res.push(getMonthName(Number(month)))
+    }
+    return res.join(" ")
 }

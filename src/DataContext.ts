@@ -1,35 +1,41 @@
-import { createContext, Dispatch, SetStateAction, useContext } from "react"
-import { defaultDataSet } from "./utils/localStorage"
+import { createContext, Dispatch, useContext } from "react"
+import { defaultDataSet, Page } from "./utils/localStorage"
+import { Actions } from "./mainReducer"
+
+interface Answer {
+    index: number
+    answer: null | string
+}
 
 export interface Data {
     name: string
-    page: "history" | "start" | "questionnaire" | "userSettings"
+    page: Page
     history: {
         date: string
         time?: string
-        answers: { index: number, answer: null | string }[]
+        answers: Answer[]
     }[]
-    questionnaire: { index: number, answer: null | string }[]
+    questionnaire: Answer[]
     settings: {
         opened: boolean
         tab: number | null
         sort: boolean
+        group: boolean
     }
 }
 
 interface DataContextProps {
-    data: Data
-    setData: Dispatch<SetStateAction<Data>>
-
-    goTo(page: Data["page"]): void
+    goTo(page: Page): () => void
+    state: Data
+    dispatch: Dispatch<Actions>
 }
 
 export const DataContext = createContext<DataContextProps>({
-    data: defaultDataSet,
-    setData() {
+    state: defaultDataSet,
+    dispatch() {
     },
-    goTo(page: Data["page"]) {
-    }
+    goTo: (page: Data["page"]) => () => {
+    },
 })
 
 export const useData = (): DataContextProps => useContext(DataContext)

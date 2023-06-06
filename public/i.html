@@ -1,0 +1,47 @@
+<html>
+<head>
+    <title>Notification demo by Shubham Verma</title>
+    <script>
+
+        function showDesktopNotification() {
+
+            const myNotification = new Notification("heading of the notification", {
+                icon: 'demo2.jpg',
+                body: "This is the body of the notification, Its a demo for learnig browser notification",
+            });
+
+            myNotification.onclick = (e) => {
+                alert('Notification  clicked')
+            }
+        }
+
+        console.log("1. ", Notification.permission); // Notification.permission => :default", "granted" and "denied"
+        if (Notification.permission === "granted") {
+            showDesktopNotification();
+        } else if (Notification.permission !== "denied") {
+            Notification.requestPermission()
+                .then(permission => {
+                    if (permission === "granted") {
+                        showDesktopNotification();
+                    }
+                })
+        }
+    </script>
+</head>
+<body>
+<h1>Learn Notification in JS with Shubham Verma</h1>
+<br>
+<button onclick="showDesktopNotification()">Click Here to show notification</button>
+or
+<span>Refresh this page to show notification</span>
+<br>
+<br>
+<h3>If you want to learn more about JS <a
+        href="https://medium.com/@svsh227/every-nodejs-developer-should-read-these-articles-f29032441a31">Click
+    Here </a>
+</h3>
+<h3>Every javascript developer should read <a
+        href="https://medium.com/@svsh227/every-nodejs-developer-should-read-these-articles-f29032441a31">This article
+</a></h3>
+</body>
+</html>

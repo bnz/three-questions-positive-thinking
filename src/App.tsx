@@ -1,42 +1,32 @@
-import { FC, useCallback, useEffect, useMemo, useState } from "react"
+import { FC, useCallback, useReducer } from "react"
 import { Welcome } from "./components/Welcome"
-import { defaultDataSet, get, update } from "./utils/localStorage"
-import { Start } from "./components/Start"
+import { get, Page } from "./utils/localStorage"
+import { Start } from "./components/Start/Start"
 import { Questionnaire } from "./components/Questionnaire"
 import { AnswersHistory } from "./components/AnswersHistory"
 import { UserSettings } from "./components/UserSettings"
 import { Data, DataContext } from "./DataContext"
+import { ActionType, mainReducer } from "./mainReducer"
+
+const initialData = get()
 
 export const App: FC = () => {
-    const [data, setData] = useState<Data>(defaultDataSet)
-    const [loaded, setLoaded] = useState(false)
-    const rawData = useMemo(get, [data])
+    const [state, dispatch] = useReducer(mainReducer, initialData as Data)
 
-    useEffect(() => {
-        setTimeout(() => {
-            if (rawData !== null) {
-                setData(rawData)
-            }
-            setLoaded(true)
-        }, 0)
-    }, [rawData, setData, setLoaded])
-
-    const goTo = useCallback((page: Data["page"]) => setData(update({ page })), [setData])
-
-    if (!loaded) {
-        return null
-    }
+    const goTo = useCallback((page: Page) => () => {
+        dispatch({ type: ActionType.GO_TO_PAGE, payload: { page } })
+    }, [dispatch])
 
     return (
-        <DataContext.Provider value={{ data, setData, goTo }}>
-            {rawData === null ? (
+        <DataContext.Provider value={{ goTo, state, dispatch }}>
+            {state === null ? (
                 <Welcome />
             ) : {
                 start: <Start />,
                 questionnaire: <Questionnaire />,
                 history: <AnswersHistory />,
                 userSettings: <UserSettings />,
-            }[data.page]}
+            }[state.page]}
         </DataContext.Provider>
     )
 }

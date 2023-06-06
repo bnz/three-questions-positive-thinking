@@ -1,21 +1,20 @@
 import type { FC } from "react"
-import { create } from "../utils/localStorage"
+import { useCallback } from "react"
 import { MainLayout } from "./MainLayout"
 import { i18n } from "../utils/i18n"
 import { NameForm } from "./NameForm"
 import { useData } from "../DataContext"
-import { useCallback } from "react"
+import { ActionType } from "../mainReducer"
 
 export const Welcome: FC = () => {
-    const { setData, goTo } = useData()
+    const { dispatch } = useData()
     const onSubmit = useCallback((name: string) => {
-        setData(create(name))
-        goTo("start")
-    }, [setData, goTo])
+        dispatch({ type: ActionType.CREATE, payload: { name } })
+    }, [dispatch])
 
     return (
         <MainLayout header={i18n("hello")}>
-            <div className="my-10 w-32 h-32 mx-auto bg-no-repeat bg-[url('./assets/hug.svg')]" />
+            <div className="hug-image" />
             <p className="text-center mb-5">
                 {i18n("enterYourNameToGetStarted")}:
             </p>

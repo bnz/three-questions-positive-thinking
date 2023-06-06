@@ -5,7 +5,6 @@ import { cx } from "../utils/cx"
 
 interface NameFormProps {
     value?: string
-
     onSubmit(name: string): void
 }
 
@@ -29,7 +28,7 @@ export const NameForm: FC<NameFormProps> = ({ onSubmit, value }) => {
 
     return (
         <form
-            className={cx("flex gap-5", edit ? "flex-row w-full" : "flex-col mx-auto max-w-xs")}
+            className={cx("flex", edit ? "flex-row w-full gap-3" : "flex-col mx-auto max-w-xs gap-5")}
             onSubmit={submit}
         >
             <input
@@ -40,8 +39,8 @@ export const NameForm: FC<NameFormProps> = ({ onSubmit, value }) => {
                 value={name}
                 onChange={onChange}
             />
-            <button type="submit" disabled={!valid} className={cx(!edit && "self-center")}>
-                {edit ? i18n("save") : i18n("start")}
+            <button type="submit" disabled={!valid} className={cx("rainbow-button px-3", edit ? "save-icon" : "self-center")}>
+                <span>{edit ? i18n("save") : i18n("start")}</span>
             </button>
         </form>
     )

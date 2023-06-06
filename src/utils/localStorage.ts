@@ -2,18 +2,25 @@ import { Data } from "../DataContext"
 
 export const lsKey = "history"
 
+export enum Page {
+    HISTORY = "history",
+    START = "start",
+    QUESTIONNAIRE = "questionnaire",
+    USER_SETTINGS = "userSettings",
+}
+
 export const defaultDataSet: Data = {
     name: "",
-    page: "start",
+    page: Page.START,
     history: [],
     questionnaire: [],
     settings: {
         opened: false,
         tab: null,
         sort: false,
-    }
+        group: true,
+    },
 }
-
 
 export const create = (name: string): Data => {
     const data: Data = {
@@ -69,6 +76,7 @@ export const update: Update = (newData) => {
     return res as Data // FIXME
 }
 
-export const clear = () => {
+export const clear = (): Data => {
     window.localStorage.removeItem(lsKey)
+    return defaultDataSet
 }

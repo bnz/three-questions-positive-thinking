@@ -1,11 +1,8 @@
-import type { MouseEvent, FC, } from "react"
-import { i18n, SomeKeys } from "../utils/i18n"
+import type { FC, MouseEvent } from "react"
 import { useCallback } from "react"
-import { useData } from "../DataContext"
-
-interface GreetingProps {
-    name: string
-}
+import { i18n, SomeKeys } from "../../utils/i18n"
+import { useData } from "../../DataContext"
+import { Page } from "../../utils/localStorage"
 
 const welcomeTypes: SomeKeys[] = [
     "goodMorning",
@@ -13,14 +10,14 @@ const welcomeTypes: SomeKeys[] = [
     "goodEvening",
 ]
 
-export const Greeting: FC<GreetingProps> = ({ name }) => {
-    const { goTo } = useData()
+export const Greeting: FC = () => {
+    const { state: { name }, goTo } = useData()
     const hour = new Date().getHours()
     const welcomeText = welcomeTypes[hour < 12 ? 0 : hour < 18 ? 1 : 2]
 
     const onClick = useCallback((e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
-        goTo("userSettings")
+        goTo(Page.USER_SETTINGS)()
     }, [goTo])
 
     return (
