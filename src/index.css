@@ -84,15 +84,15 @@ body {
 
     .rainbow {
         background: linear-gradient(124deg,
-        rgba(255, 36, 0, 0.25),
-        rgba(232, 29, 29, 0.25),
-        rgba(232, 183, 29, 0.25),
-        rgba(227, 232, 29, 0.25),
-        rgba(29, 232, 64, 0.25),
-        rgba(29, 221, 232, 0.25),
-        rgba(43, 29, 232, 0.25),
-        rgba(221, 0, 243, 0.25),
-        rgba(221, 0, 243, 0.25)
+        rgba(255, 36, 0, 0.1),
+        rgba(232, 29, 29, 0.1),
+        rgba(232, 183, 29, 0.1),
+        rgba(227, 232, 29, 0.1),
+        rgba(29, 232, 64, 0.1),
+        rgba(29, 221, 232, 0.1),
+        rgba(43, 29, 232, 0.1),
+        rgba(221, 0, 243, 0.1),
+        rgba(221, 0, 243, 0.1)
         );
         background-size: 1800% 1800%;
         animation: rainbow 15s ease infinite;
@@ -149,7 +149,19 @@ body {
     .content {
         @apply relative rounded max-w-2xl;
         @apply mx-auto pb-5 mb-10;
-        @apply dark:lg:shadow-3xl lg:shadow-2xl lg:w-[42rem];
+
+    }
+
+    .questionnaire-form {
+        @apply relative overflow-hidden;
+        @apply text-center flex flex-col gap-10;
+        @apply rainbow rounded;
+        @apply my-10 mx-5 md:mx-20 px-10 md:px-0 py-5;
+        @apply dark:shadow-3xl shadow-2xl;
+
+        @apply after:absolute after:-top-10 after:-left-10;
+        @apply after:block after:w-28 after:h-28 after:mb-3;
+        @apply after:bg-[url('./assets/sun.svg')];
     }
 
     .content header {
@@ -206,7 +218,7 @@ body {
     }
 
     .restart-button {
-        @apply absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10;
+        @apply absolute right-0 top-0 w-10 h-10 rounded;
         @apply bg-[url('./assets/restart.svg')] dark:bg-[url('./assets/restart-dark.svg')];
         @apply bg-no-repeat bg-[length:24px_24px] bg-center;
     }
@@ -291,12 +303,23 @@ body {
     .month-heading {
         @apply sticky;
         @apply bg-white/30 dark:bg-black/30;
+        @apply flex justify-between;
     }
 
     .month-heading > div {
+        @apply inline-block px-3 py-0.5 text-xs;
+    }
+
+    .month-heading > div:first-child {
+        @apply text-white/75 uppercase flex items-center;
         @apply min-w-[200px];
-        @apply inline-block px-3 py-1;
         @apply bg-gradient-to-r from-white via-white dark:from-black dark:via-black;
+    }
+
+    .month-heading > div:last-child {
+        @apply text-right text-white/50;
+        @apply min-w-[200px];
+        @apply bg-gradient-to-l from-white via-white dark:from-black dark:via-black;
     }
 
     .month-heading + .history-day {

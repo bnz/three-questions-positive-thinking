@@ -33,6 +33,11 @@ export const getMonth = (date: string) =>
         .DateTimeFormat(map[lang], { month: "long" })
         .format(new Date(date))
 
+export const getYear = (date: string) =>
+    new Intl
+        .DateTimeFormat(map[lang], { year: "numeric" })
+        .format(new Date(date))
+
 export const currentTime = () => {
     const [hh, mm] = getCurrentDateTime()
         .split("T")[1]
@@ -52,3 +57,18 @@ export const formatToHuman = (date: string, showMonth = true): string => {
     }
     return res.join(" ")
 }
+
+export const getMissingDates = (array: any[]) => array
+    .sort((a, b) => Date.parse(a) - Date.parse(b))
+    .reduce((hash => (p: string[], c) => {
+        const missingDaysNo = (Date.parse(c) - hash.prev) / (1000 * 3600 * 24)
+        if (hash.prev && missingDaysNo > 1) {
+            for (let i = 1; i < missingDaysNo; i++) {
+                p.push(
+                    (new Date(hash.prev + i * (1000 * 3600 * 24))).toISOString().split("T")[0],
+                )
+            }
+        }
+        hash.prev = Date.parse(c)
+        return p
+    })(Object.create(null)), [])

@@ -2,7 +2,7 @@ import type { FC } from "react"
 import { Fragment, useCallback, useState } from "react"
 import { defaultDataSet, get, Page, update } from "../utils/localStorage"
 import { i18n } from "../utils/i18n"
-import { currentDayOfWeek, formatToHuman, getMonth } from "../utils/todayDate"
+import { currentDayOfWeek, formatToHuman, getMonth, getYear } from "../utils/todayDate"
 import { questions } from "./Questionnaire"
 import { MainLayout } from "./MainLayout"
 import { cx } from "../utils/cx"
@@ -109,12 +109,14 @@ export const AnswersHistory: FC = () => {
             }).map(({ date, time, answers }, index) => {
 
                 const month = getMonth(date)
+                const year = getYear(date)
                 let Render: FC = () => null
                 if (prev !== month && group) {
                     prev = month
                     Render = () => (
                         <div className={cx("month-heading", open ? "top-[140px]" : "top-[96px]")}>
                             <div>{month}</div>
+                            <div>{year}</div>
                         </div>
                     )
                 }

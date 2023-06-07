@@ -5,7 +5,6 @@ export const lsKey = "history"
 export enum Page {
     HISTORY = "history",
     START = "start",
-    QUESTIONNAIRE = "questionnaire",
     USER_SETTINGS = "userSettings",
 }
 

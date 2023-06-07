@@ -2,7 +2,6 @@ import { FC, useCallback, useReducer } from "react"
 import { Welcome } from "./components/Welcome"
 import { get, Page } from "./utils/localStorage"
 import { Start } from "./components/Start/Start"
-import { Questionnaire } from "./components/Questionnaire"
 import { AnswersHistory } from "./components/AnswersHistory"
 import { UserSettings } from "./components/UserSettings"
 import { Data, DataContext } from "./DataContext"
@@ -23,7 +22,6 @@ export const App: FC = () => {
                 <Welcome />
             ) : {
                 start: <Start />,
-                questionnaire: <Questionnaire />,
                 history: <AnswersHistory />,
                 userSettings: <UserSettings />,
             }[state.page]}

@@ -3,7 +3,7 @@
   "page": "history",
   "history": [
     {
-      "date": "2023-04-05",
+      "date": "2023-04-07",
       "time": "11:52",
       "answers": [
         {
@@ -399,7 +399,7 @@
       ]
     },
     {
-      "date": "2023-01-07",
+      "date": "2023-01-09",
       "time": "11:53",
       "answers": [
         {
@@ -417,7 +417,7 @@
       ]
     },
     {
-      "date": "2023-04-13",
+      "date": "2023-04-17",
       "time": "09:05",
       "answers": [
         {
@@ -457,6 +457,7 @@
   "settings": {
     "opened": false,
     "tab": null,
-    "sort": false
+    "sort": false,
+    "group": true
   }
 }
