@@ -46,7 +46,6 @@ export const Questionnaire: FC = () => {
 
     const reset = useCallback((e: FormEvent<HTMLButtonElement>) => {
         e.preventDefault()
-        console.log("reset")
         dispatch({ type: ActionType.QUESTIONNAIRE_RESET, payload: undefined })
         setAnswer("")
         ref.current?.focus()

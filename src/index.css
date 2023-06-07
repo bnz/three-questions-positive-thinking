@@ -311,13 +311,13 @@ body {
     }
 
     .month-heading > div:first-child {
-        @apply text-white/75 uppercase flex items-center;
+        @apply text-black/75 dark:text-white/75 uppercase flex items-center;
         @apply min-w-[200px];
         @apply bg-gradient-to-r from-white via-white dark:from-black dark:via-black;
     }
 
     .month-heading > div:last-child {
-        @apply text-right text-white/50;
+        @apply text-right text-black/50 dark:text-white/50;
         @apply min-w-[200px];
         @apply bg-gradient-to-l from-white via-white dark:from-black dark:via-black;
     }
