@@ -1,4 +1,3 @@
-import type { FC } from "react"
 import { useCallback } from "react"
 import { MainLayout } from "./MainLayout"
 import { i18n } from "../utils/i18n"
@@ -6,7 +5,7 @@ import { NameForm } from "./NameForm"
 import { useData } from "../DataContext"
 import { ActionType } from "../mainReducer"
 
-export const Welcome: FC = () => {
+export function Welcome() {
     const { dispatch } = useData()
     const onSubmit = useCallback((name: string) => {
         dispatch({ type: ActionType.CREATE, payload: { name } })

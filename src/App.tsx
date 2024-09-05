@@ -1,4 +1,4 @@
-import { FC, useCallback, useReducer } from "react"
+import { useCallback, useReducer } from "react"
 import { Welcome } from "./components/Welcome"
 import { get, Page } from "./utils/localStorage"
 import { Start } from "./components/Start/Start"
@@ -9,7 +9,7 @@ import { ActionType, mainReducer } from "./mainReducer"
 
 const initialData = get()
 
-export const App: FC = () => {
+export function App() {
     const [state, dispatch] = useReducer(mainReducer, initialData as Data)
 
     const goTo = useCallback((page: Page) => () => {

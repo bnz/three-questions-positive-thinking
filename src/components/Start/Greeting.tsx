@@ -1,4 +1,4 @@
-import type { FC, MouseEvent } from "react"
+import type { MouseEvent } from "react"
 import { useCallback } from "react"
 import { i18n, SomeKeys } from "../../utils/i18n"
 import { useData } from "../../DataContext"
@@ -10,7 +10,7 @@ const welcomeTypes: SomeKeys[] = [
     "goodEvening",
 ]
 
-export const Greeting: FC = () => {
+export function Greeting() {
     const { state: { name }, goTo } = useData()
     const hour = new Date().getHours()
     const welcomeText = welcomeTypes[hour < 12 ? 0 : hour < 18 ? 1 : 2]

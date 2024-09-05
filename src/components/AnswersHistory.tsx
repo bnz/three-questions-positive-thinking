@@ -1,4 +1,3 @@
-import type { FC } from "react"
 import { Fragment, useCallback, useState } from "react"
 import { defaultDataSet, get, Page, update } from "../utils/localStorage"
 import { i18n } from "../utils/i18n"
@@ -8,7 +7,7 @@ import { MainLayout } from "./MainLayout"
 import { cx } from "../utils/cx"
 import { useData } from "../DataContext"
 
-export const AnswersHistory: FC = () => {
+export function AnswersHistory() {
     const { goTo, state } = useData()
     const { opened, tab, sort: sortSaved, group: groupSaved } = get()?.settings || defaultDataSet.settings
     const [open, setOpen] = useState<boolean>(opened)
@@ -39,6 +38,7 @@ export const AnswersHistory: FC = () => {
         setTabIndex(tab)
         update((data) => ({ settings: { ...data.settings, tab } }))
     }, [setTabIndex])
+
     const toggleSort = useCallback(() => {
         setSort((prev) => {
             const sort = !prev
@@ -110,15 +110,17 @@ export const AnswersHistory: FC = () => {
 
                 const month = getMonth(date)
                 const year = getYear(date)
-                let Render: FC = () => null
+                let Render = function (): JSX.Element | null {
+                    return null
+                }
                 if (prev !== month && group) {
                     prev = month
-                    Render = () => (
-                        <div className={cx("month-heading", open ? "top-[140px]" : "top-[96px]")}>
+                    Render = function () {
+                        return <div className={cx("month-heading", open ? "top-[140px]" : "top-[96px]")}>
                             <div>{month}</div>
                             <div>{year}</div>
                         </div>
-                    )
+                    }
                 }
 
                 return (

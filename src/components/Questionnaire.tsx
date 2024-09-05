@@ -11,7 +11,7 @@ export const questions: { title: SomeKeys }[] = [
     { title: "iWant" },
 ]
 
-export const Questionnaire: FC = () => {
+export function Questionnaire() {
     const { state, dispatch } = useData()
     const [question, setQuestion] = useState<number | null>(null)
     const [answer, setAnswer] = useState("")

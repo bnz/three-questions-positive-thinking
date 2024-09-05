@@ -1,5 +1,5 @@
 import { Data } from "./DataContext"
-import { clear, create, defaultDataSet, Page, update } from "./utils/localStorage"
+import { clear, create, Page, update } from "./utils/localStorage"
 import { generateRandom, randomIntFromInterval } from "./utils/randomIntFromInterval"
 import { currentTime, todayDate } from "./utils/todayDate"
 
@@ -29,7 +29,7 @@ export type Actions =
     | GenAction<ActionType.UPDATE_NAME, { name: string }>
     | GenAction<ActionType.DELETE_ALL>
 
-export const mainReducer = (state: Data, { type, payload }: Actions): Data => {
+export function mainReducer(state: Data, { type, payload }: Actions): Data {
     switch (type) {
 
         case ActionType.CREATE:
@@ -84,7 +84,7 @@ export const mainReducer = (state: Data, { type, payload }: Actions): Data => {
         case ActionType.DELETE_ALL:
             clear()
             window.location.reload()
-            return defaultDataSet
+            return state
 
         default:
             return state

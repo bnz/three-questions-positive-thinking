@@ -359,4 +359,20 @@ body {
         @apply text-white dark:text-white;
         @apply bg-red-500 dark:bg-red-500 hover:dark:bg-red-900;
     }
+
+    .data-button {
+        @apply button w-full flex justify-center;
+        @apply before:relative before:inline-block before:w-6 before:h-6 before:mr-1;
+        @apply before:bg-no-repeat before:bg-center;
+    }
+
+    .export-button {
+        @apply data-button;
+        @apply before:bg-[url('./assets/export.svg')] before:dark:bg-[url('./assets/export-dark.svg')];
+    }
+
+    .import-button {
+        @apply data-button;
+        @apply before:bg-[url('./assets/import.svg')] before:dark:bg-[url('./assets/import-dark.svg')];
+    }
 }

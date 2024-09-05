@@ -1,4 +1,3 @@
-import type { FC } from "react"
 import { useCallback, useState } from "react"
 import { useData } from "../DataContext"
 import { MainLayout } from "./MainLayout"
@@ -6,8 +5,9 @@ import { i18n } from "../utils/i18n"
 import { NameForm } from "./NameForm"
 import { ActionType } from "../mainReducer"
 import { Page } from "../utils/localStorage"
+// import { UserSettingsImportExport } from "./UserSettingsImportExport"
 
-export const UserSettings: FC = () => {
+export function UserSettings() {
     const { goTo, state: { name }, dispatch } = useData()
     const onSubmit = useCallback((name: string) => {
         dispatch({ type: ActionType.UPDATE_NAME, payload: { name } })
@@ -22,6 +22,7 @@ export const UserSettings: FC = () => {
                     {i18n("changeName")}
                     <NameForm value={name} onSubmit={onSubmit} />
                 </label>
+                {/*<UserSettingsImportExport />*/}
                 <div className="text-center pt-16 pb-10">
                     <button type="button" className="error-button" onClick={doOpen}>
                         {i18n("resetAll")}

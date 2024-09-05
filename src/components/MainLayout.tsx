@@ -1,4 +1,4 @@
-import type { FC, PropsWithChildren, ReactNode } from "react"
+import type { PropsWithChildren, ReactNode } from "react"
 import { useLayoutEffect } from "react"
 import { i18n } from "../utils/i18n"
 
@@ -11,16 +11,16 @@ interface MainLayoutProps {
     headerChildren?: ReactNode
 }
 
-export const MainLayout: FC<PropsWithChildren<MainLayoutProps>> = ({
+export const MainLayout = ({
     children,
     header,
     goBackTo,
     headerBlur,
     headerChildren,
-}) => {
+}: PropsWithChildren<MainLayoutProps>) => {
 
-    useLayoutEffect(() => {
-        const fn = ({ matches }: { matches: boolean }): void => {
+    useLayoutEffect(function () {
+        function fn({ matches }: { matches: boolean }): void {
             if (matches) {
                 document.documentElement.classList.add("dark")
                 themeColorMeta?.setAttribute("content", "#000")
@@ -29,6 +29,7 @@ export const MainLayout: FC<PropsWithChildren<MainLayoutProps>> = ({
                 themeColorMeta?.setAttribute("content", "#fff")
             }
         }
+
         const mql = window.matchMedia("(prefers-color-scheme: dark)")
         mql.addEventListener("change", fn)
         fn({ matches: mql.matches })
@@ -52,7 +53,7 @@ export const MainLayout: FC<PropsWithChildren<MainLayoutProps>> = ({
                 </section>
             </main>
             <footer className="footer">
-                2023 &copy; bonez
+                2024 &copy; bonez
             </footer>
         </>
     )

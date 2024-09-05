@@ -21,4 +21,6 @@ export type SomeKeys = Partial<Keys>
 
 const map: Record<Lang, Record<Keys, string>> = { ru }
 
-export const i18n = (key: Keys): string => map[lang][key] || key
+export function i18n(key: Keys): string {
+    return map[lang][key] || key
+}

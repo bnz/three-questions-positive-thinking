@@ -1,4 +1,3 @@
-import type { FC } from "react"
 import { i18n } from "../utils/i18n"
 import { ChangeEvent, FormEvent, useCallback, useState } from "react"
 import { cx } from "../utils/cx"
@@ -8,7 +7,7 @@ interface NameFormProps {
     onSubmit(name: string): void
 }
 
-export const NameForm: FC<NameFormProps> = ({ onSubmit, value }) => {
+export function NameForm({ onSubmit, value }: NameFormProps) {
     const edit = value !== undefined
 
     const [name, setName] = useState(value || "")
@@ -39,7 +38,11 @@ export const NameForm: FC<NameFormProps> = ({ onSubmit, value }) => {
                 value={name}
                 onChange={onChange}
             />
-            <button type="submit" disabled={!valid} className={cx("rainbow-button px-3", edit ? "save-icon" : "self-center")}>
+            <button
+                type="submit"
+                disabled={!valid}
+                className={cx("rainbow-button px-3", edit ? "save-icon" : "self-center")}
+            >
                 <span>{edit ? i18n("save") : i18n("start")}</span>
             </button>
         </form>

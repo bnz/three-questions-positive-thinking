@@ -21,7 +21,7 @@ export const defaultDataSet: Data = {
     },
 }
 
-export const create = (name: string): Data => {
+export function create(name: string): Data {
     const data: Data = {
         ...defaultDataSet,
         name,
@@ -30,7 +30,7 @@ export const create = (name: string): Data => {
     return data
 }
 
-export const get = (): Data | null => {
+export function get(): Data | null {
     let data: Data | null = null
     try {
         const item = localStorage.getItem(lsKey)
@@ -43,9 +43,7 @@ export const get = (): Data | null => {
     return data
 }
 
-type Update = (newData: Partial<Data> | ((data: Data) => Partial<Data>)) => Data
-
-export const update: Update = (newData) => {
+export function update(newData: Partial<Data> | ((data: Data) => Partial<Data>)): Data {
     const dataString = window.localStorage.getItem(lsKey)
 
     let res: Partial<Data> | "" = ""
@@ -75,7 +73,7 @@ export const update: Update = (newData) => {
     return res as Data // FIXME
 }
 
-export const clear = (): Data => {
+export function clear(): Data {
     window.localStorage.removeItem(lsKey)
     return defaultDataSet
 }

@@ -1,9 +1,9 @@
-import { FC, useMemo } from "react"
+import { useMemo } from "react"
 import { useData } from "../../DataContext"
 import { i18n } from "../../utils/i18n"
 import { getMissingDates, todayDate } from "../../utils/todayDate"
 
-export const Heading: FC = () => {
+export function Heading() {
     const { state: { history } } = useData()
 
     const [daysDifference] = useMemo(() => {
