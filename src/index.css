@@ -375,4 +375,10 @@ body {
         @apply data-button;
         @apply before:bg-[url('./assets/import.svg')] before:dark:bg-[url('./assets/import-dark.svg')];
     }
+
+    .remove-field-button {
+        @apply bg-[url('./assets/clear.svg')] dark:bg-[url('./assets/clear-dark.svg')];
+        @apply bg-transparent bg-no-repeat bg-center bg-[length:20px_20px];
+        @apply absolute top-1/2 -translate-y-1/2 -right-7 w-5 h-5;
+    }
 }

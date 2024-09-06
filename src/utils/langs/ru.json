@@ -10,9 +10,9 @@
   "todayIsNDay": "Сегодня ###-й день",
   "questionsForToday": "Вопросы на сегодня",
   "viewTheHistoryOfResponses": "Смотреть историю ответов",
-  "iFeel": "Я чувствую",
-  "iLove": "Я люблю",
-  "iWant": "Я хочу",
+  "wasGood": "Что сегодня было хорошего?",
+  "gratefulFor": "За что благодарен?",
+  "learnedTo": "Чему важному научил меня сегодняшний день?",
   "save": "Сохранить",
   "thereAreNoMoreQuestionsForToday": "На сегодня вопросов больше нет,",
   "seeYouTomorrow": "увидимся завтра",
@@ -25,5 +25,8 @@
   "yesDeleteAll": "Да, удалить все!",
   "areYouSure": "Вы уверены?",
   "exportData": "Экспорт данных",
-  "importData": "Импорт данных"
+  "importData": "Импорт данных",
+  "minAnswers": "Минимум ### ответа",
+  "minAnswer": "Минимум ### ответ",
+  "moreAnswer": "Еще ответ"
 }

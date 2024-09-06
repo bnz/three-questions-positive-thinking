@@ -4,7 +4,7 @@ import { Actions } from "./mainReducer"
 
 interface Answer {
     index: number
-    answer: null | string
+    answer: null | string[]
 }
 
 export interface Data {
