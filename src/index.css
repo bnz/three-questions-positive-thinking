@@ -8,21 +8,21 @@
 
 :root {
     color-scheme: light;
-    --color1: rgba(128, 0, 128, .5);
-    --color2: rgba(75, 189, 216, .5);
-    --color3: rgba(255, 127, 80, .5);
-    --color4: rgba(255, 215, 0, .5);
+    --color1: rgba(255, 27, 255, 0.5);
+    --color2: rgba(32, 236, 255, 0.5);
+    --color3: rgba(85, 255, 0, 0.5);
+    --color4: rgba(255, 28, 28, 0.5);
 }
 
 @media (prefers-color-scheme: light) {
     :root {
-        --main-bg-color: #fff;
+        --main-bg-color: #aaa;
     }
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --main-bg-color: #000;
+        --main-bg-color: #333;
     }
 }
 

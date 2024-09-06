@@ -1,4 +1,4 @@
-import type { ChangeEvent, FC } from "react"
+import type { ChangeEvent } from "react"
 import { FormEvent, useCallback, useEffect, useRef, useState } from "react"
 import { useData } from "../DataContext"
 import { update } from "../utils/localStorage"
