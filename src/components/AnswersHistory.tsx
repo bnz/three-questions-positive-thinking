@@ -10,8 +10,8 @@ import { useData } from "../DataContext"
 export function AnswersHistory() {
     const { goTo, state } = useData()
     const { sort: sortSaved, group: groupSaved } = get()?.settings || defaultDataSet.settings
-    const [sort, setSort] = useState<boolean>(sortSaved)
-    const [group, setGroup] = useState<boolean>(groupSaved)
+    const [sort] = useState<boolean>(sortSaved)
+    const [group] = useState<boolean>(groupSaved)
 
     let prev = ""
 

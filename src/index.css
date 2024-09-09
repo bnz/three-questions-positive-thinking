@@ -346,7 +346,7 @@ body {
     }
 
     .hug-image {
-        @apply my-10 w-32 h-32 mx-auto bg-no-repeat bg-[url('./assets/hug.svg')];
+        @apply my-10 w-32 h-32 mx-auto text-9xl;
     }
 
     .button {

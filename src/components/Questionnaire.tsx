@@ -3,7 +3,6 @@ import { useData } from "../DataContext"
 import { update } from "../utils/localStorage"
 import { i18n, SomeKeys } from "../utils/i18n"
 import { ActionType } from "../mainReducer"
-import { cx } from "../utils/cx"
 
 export const questions: { title: SomeKeys }[] = [
     { title: "wasGood" },

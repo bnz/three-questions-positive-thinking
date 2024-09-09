@@ -19,7 +19,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "deploy": "gh-pages -d build",
+    "deploy": "echo 3q-positive-thinking.bonez.me > ./build/CNAME && gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

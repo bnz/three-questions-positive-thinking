@@ -13,7 +13,7 @@ export function Welcome() {
 
     return (
         <MainLayout header={i18n("hello")}>
-            <div className="hug-image" />
+            <div className="hug-image">🤗</div>
             <p className="text-center mb-5">
                 {i18n("enterYourNameToGetStarted")}:
             </p>
