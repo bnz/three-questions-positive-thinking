@@ -115,7 +115,7 @@ export function Questionnaire() {
             <div className="flex flex-col gap-2">
                 {new Array(fieldsCount).fill(null).map(function (_, index) {
                     return (
-                        <div key={index} className="md:w-2/3 md:mx-auto outline outline-1 relative">
+                        <div key={index} className="md:w-2/3 md:mx-auto outline outline-1 relative rounded">
                             <input
                                 placeholder={`${index + 1}`}
                                 type="text"

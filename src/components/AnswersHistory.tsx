@@ -67,18 +67,18 @@ export function AnswersHistory() {
                             <div className="flex-1 overflow-hidden">
                                 {questions.map(function ({ title }, i) {
                                     return (
-                                        <>
+                                        <Fragment key={i}>
                                             <div className="py-0.5 flex items-start mb-2 font-bold">
                                                 {i18n(title)}
                                             </div>
-                                            <div className="py-0.5 flex flex-col items-start mb-3 pl-3">
+                                            <ol className="py-0.5 flex flex-col items-start mb-3 list-decimal list-inside">
                                                 {(answers.find(function ({ index }) {
                                                     return index === i
                                                 })?.answer || []).map(function (str, i) {
-                                                    return <div key={i} className="w-full">{i + 1}. {str.trim()}</div>
+                                                    return <li key={i} className="w-full">{str.trim()}</li>
                                                 })}
-                                            </div>
-                                        </>
+                                            </ol>
+                                        </Fragment>
                                     )
                                 })}
                             </div>
